@@ -1,9 +1,11 @@
 package com.facturacion.controller;
 
+import com.facturacion.dto.DetFacturaDTO;
 import com.facturacion.entity.Cliente;
 import com.facturacion.entity.Producto;
 import com.facturacion.service.ClienteService;
 import com.facturacion.service.ProductoService;
+import com.facturacion.util.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,16 @@ public class ProductoController {
         Optional<Producto> producto = this.productoService.obtenerProductoPorId(id);
         return producto.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    @GetMapping("/verificar-cod-producto/{cod_producto}")
+    public ResponseEntity<ResponseMessage> verificarSiExiteElCodProducto(@PathVariable String cod_producto) {
+        String verificarSiExiteElCodProducto = this.productoService.verificarSiExiteElCodProducto(cod_producto);
+        return ResponseEntity.ok(new ResponseMessage(200, verificarSiExiteElCodProducto));
+    }
+    @PostMapping("/disminuir-stock")
+    public ResponseEntity<Integer> disminuirStock(@RequestBody List<DetFacturaDTO> detallesFacturaDTO) {
+        this.productoService.disminuirStock(detallesFacturaDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @PostMapping("/guardar")
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
@@ -40,13 +52,8 @@ public class ProductoController {
 
     @PutMapping("/actualizar")
     public ResponseEntity<Void> actualizarProducto(@RequestBody Producto producto) {
-//        if (clienteService.obtenerClientePorId(id).isPresent()) {
-//            producto.setFechaCreacion(LocalDate.now());
             this.productoService.actualizarProducto(producto);
             return new ResponseEntity<>(HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
     }
 
     @DeleteMapping("/eliminar/{id}")
@@ -58,5 +65,6 @@ public class ProductoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
 }

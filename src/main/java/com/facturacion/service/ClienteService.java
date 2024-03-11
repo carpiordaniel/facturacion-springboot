@@ -34,4 +34,9 @@ public class ClienteService {
     public void eliminarCliente(Integer id) {
         this.clienteRepository.deleteById(id);
     }
+
+    public String verificarSiExiteCliente(String ruc_dni) {
+        return this.clienteRepository.verificarSiExiteCliente(ruc_dni);
+    }
+
 }

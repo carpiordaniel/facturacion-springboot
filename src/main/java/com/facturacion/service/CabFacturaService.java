@@ -18,12 +18,10 @@ public class CabFacturaService {
         this.cabFacturaRepository = cabFacturaRepository;
     }
 
-    // Método para guardar una nueva factura
     public CabFactura guardarCabFactura(CabFactura cabFactura) {
         return this.cabFacturaRepository.save(cabFactura);
     }
 
-    // Método para obtener una factura por su ID
     public List<CabFactura> obtenerTodas( ) {
         Iterable<CabFactura> cabFacturas = this.cabFacturaRepository.findAll();
         List<CabFactura> listaCabFacturas = new ArrayList<>();
@@ -35,10 +33,13 @@ public class CabFacturaService {
         return this.cabFacturaRepository.findById(id);
     }
 
-    // Método para eliminar una factura por su ID
     public void eliminarPorId(Integer id) {
         this.cabFacturaRepository.deleteById(id);
     }
 
 
+
+    public Integer generaFactura() {
+        return this.cabFacturaRepository.generaFactura();
+    }
 }

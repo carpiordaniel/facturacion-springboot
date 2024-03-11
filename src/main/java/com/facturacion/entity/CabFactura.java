@@ -27,6 +27,14 @@ public class CabFactura {
     @Column(name = "ruc_cliente")
     private String rucCliente;
 
+    @Column(name = "subtotal", columnDefinition = "DECIMAL(10,2)")
+    private String subtotal;
+    @Column(name = "igv", columnDefinition = "DECIMAL(10,2)")
+    private String igv;
+    @Column(name = "total", columnDefinition = "DECIMAL(10,2)")
+    private String total;
+
+
     @JsonManagedReference
     @OneToMany(mappedBy = "pkCabFactura", cascade = CascadeType.ALL)
     private List<DetFactura> detFactura;

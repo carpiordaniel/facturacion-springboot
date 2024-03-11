@@ -25,32 +25,6 @@ public class DetFacturaService {
         this.cabFacturaRepository = cabFacturaRepository;
     }
 
-    // Método para guardar un detalle de factura
-//    public List<DetFactura> guardarDetalleFactura(List<DetFactura> detalleFactura) {
-//        Iterable<DetFactura> detFacturas = this.detFacturaRepository.saveAll(detalleFactura);
-//        List<DetFactura> listaDetFacturas = new ArrayList<>();
-//        detalleFactura.forEach(listaDetFacturas::add);
-//        return listaDetFacturas;
-//    }
-
-//    public List<DetFactura> guardarDetalleFactura(List<DetFacturaDTO> detalleFacturaDto) {
-//        List<DetFactura> detalleFacturas = new ArrayList<>();
-//        for ( DetFacturaDTO detalleDTO : detalleFacturaDto ){
-//            CabFactura cabFactura = this.cabFacturaRepository.findById(detalleDTO.getPkCabFactura()).orElse(null);
-//            if ( cabFactura == null){
-//                continue;
-//            }
-//            DetFactura detFactura = new DetFactura();
-//            detFactura.setId(detalleDTO.getCantidad());
-//            detFactura.setCodigoProducto(detalleDTO.getCodigoProducto());
-//            detFactura.setPkCabFactura(cabFactura);
-//            detalleFacturas.add(detFactura);
-//        }
-//        LOGGER.info("Se guardaron {} detalles de facturas", detalleFacturas.size());
-//        LOGGER.info("Se guardaron {} detalles de facturas", detalleFacturas);
-//        return (List<DetFactura>) this.detFacturaRepository.saveAll(detalleFacturas);
-//    }
-
     @Transactional
     public void insertarFacturas(List<DetFacturaDTO> detFacturaDTOs) {
         for (DetFacturaDTO detFacturaDTO : detFacturaDTOs) {
@@ -60,13 +34,5 @@ public class DetFacturaService {
                                                       );
         }
     }
-
-
-//    public List<DetFactura> obtenerTodas( ) {
-//        Iterable<DetFactura> detFacturas = this.detFacturaRepository.findAll();
-//        List<DetFactura> listaDetFacturas = new ArrayList<>();
-//        detFacturas.forEach(listaDetFacturas::add);
-//        return listaDetFacturas;
-//    }
 
 }

@@ -3,6 +3,7 @@ package com.facturacion.controller;
 import com.facturacion.dto.DetFacturaDTO;
 import com.facturacion.entity.DetFactura;
 import com.facturacion.service.DetFacturaService;
+import com.facturacion.util.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,27 +20,11 @@ public class DetFacturaController {
         this.detFacturaService = detFacturaService;
     }
 
-//    @PostMapping("/guardar")
-//    public ResponseEntity<List<DetFactura>> guardarFactura(@RequestBody List<DetFacturaDTO> detFacturaDto) {
-//        List<DetFactura> detFacturaGuardada = this.detFacturaService.guardarDetalleFactura(detFacturaDto);
-//        return new ResponseEntity<>(detFacturaGuardada, HttpStatus.CREATED);
-//    }
     @PostMapping("/guardar")
-    public ResponseEntity<String> guardarDetallesFactura(@RequestBody List<DetFacturaDTO> detallesFacturaDTO) {
+    public ResponseEntity<ResponseMessage> guardarDetallesFactura(@RequestBody List<DetFacturaDTO> detallesFacturaDTO) {
         detFacturaService.insertarFacturas(detallesFacturaDTO);
-        return new ResponseEntity<>("Detalles de factura guardados exitosamente", HttpStatus.CREATED);
+        return ResponseEntity.ok(new ResponseMessage(200, "Detalles de factura guardados exitosamente"));
     }
 
-//    @PostMapping("/guardar")
-//    public ResponseEntity<List<DetFactura>> guardarFactura(@RequestBody List<DetFactura> detFactura) {
-//        List<DetFactura> detFacturaGuardada = this.detFacturaService.guardarDetalleFactura(detFactura);
-//        return new ResponseEntity<>(detFacturaGuardada, HttpStatus.CREATED);
-//    }
-
-//    @GetMapping("/all")
-//    public ResponseEntity<List<DetFactura>> obtenerTodasCabeceras() {
-//        List<DetFactura> detFacturas = this.detFacturaService.obtenerTodas();
-//        return new ResponseEntity<>(detFacturas, HttpStatus.OK);
-//    }
 
 }

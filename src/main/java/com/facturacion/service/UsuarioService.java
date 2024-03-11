@@ -16,9 +16,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-//    public Optional<Usuario> buscarPorUsuarioYContrasenia(String usuario, String contrasenia) {
-//        return usuarioRepository.findByUsernameAndPassword(usuario, contrasenia);
-//    }
     public Optional<Object[]> buscarPorUsuarioYContrasenia(String usuario, String password) {
         return this.usuarioRepository.findByUsernameAndPasswords(usuario, password);
     }

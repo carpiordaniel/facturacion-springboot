@@ -13,13 +13,8 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
-//    Optional<Usuario> findByUsernameAndPassword(String username, String password);
-
     @Query(value = "SELECT username, password FROM usuario WHERE username = :username AND password = :password", nativeQuery = true)
     Optional<Object[]> findByUsernameAndPasswords(@Param("username") String username, @Param("password") String password);
-
-//    @Query("SELECT u.usuario, u.contrasenia FROM Usuario u WHERE u.usuario = :username AND u.contrasenia = :password")
-//    Optional<Usuario> findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     @Query(value = "SELECT intentos_fallidos FROM usuario WHERE username = :username", nativeQuery = true)
     Optional<Integer> obtenerIntentosFallidos(@Param("username") String username);
